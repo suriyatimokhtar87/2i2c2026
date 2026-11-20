@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2i2c 2026 — Invention, Innovation, Creative Ideas Competition</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .kad-modul { text-align: center; padding: 30px 20px; border-radius: var(--jejari); background: var(--putih); box-shadow: var(--bayang); transition: var(--transisi); text-decoration: none; color: var(--teks-utama); display: block; }
+    .kad-modul:hover { box-shadow: var(--bayang-hover); transform: translateY(-4px); color: var(--teks-utama); }
+    .kad-modul .ikon { font-size: 2.8rem; margin-bottom: 12px; display: block; }
+    .kad-modul h3 { color: var(--biru); margin-bottom: 6px; }
+    .kad-modul p { font-size: 0.875rem; color: var(--teks-sederhana); margin: 0; }
+    .pengumuman-kad { border-left: 4px solid var(--biru); padding: 16px 20px; background: var(--putih); border-radius: var(--jejari-kecil); box-shadow: var(--bayang); margin-bottom: 12px; }
+    .pengumuman-kad h4 { color: var(--biru); margin-bottom: 4px; }
+    .pengumuman-kad p { font-size: 0.875rem; color: var(--teks-sederhana); margin: 0; }
+  </style>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar-utama">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <img src="imej/LOGO2I2C.png" alt="2i2c KK Bentong" style="max-height:70px;max-width:100%;object-fit:contain;">
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-pautan aktif"><span class="sidebar-ikon">🏠</span><span>Laman Utama</span></a>
+      <a href="daftar.html" class="sidebar-pautan"><span class="sidebar-ikon">📝</span><span>Daftar Peserta</span></a>
+      <a href="jadual.html" class="sidebar-pautan"><span class="sidebar-ikon">📅</span><span>Jadual Acara</span></a>
+      <a href="leaderboard.html" class="sidebar-pautan"><span class="sidebar-ikon">🏅</span><span>Papan Markah</span></a>
+      <a href="pengumuman.html" class="sidebar-pautan"><span class="sidebar-ikon">📢</span><span>Pengumuman</span></a>
+      <a href="semak-status.html" class="sidebar-pautan"><span class="sidebar-ikon">🔍</span><span>Semak Status</span></a>
+    </nav>
+    <div class="sidebar-bawah">
+      <a href="daftar.html" class="btn btn-utama btn-blok" style="margin-bottom:12px;justify-content:center;">Daftar Sekarang →</a>
+      <a href="login.html" class="sidebar-pautan sidebar-pautan-kecil"><span class="sidebar-ikon">🔐</span><span>Admin / Juri</span></a>
+    </div>
+  </aside>
+
+  <!-- Overlay & togol mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-togol" id="sidebar-togol" aria-label="Buka Menu">&#9776;</button>
+
+  <!-- Kandungan Utama -->
+  <div class="kandungan-utama">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="kontena">
+        <img src="imej/LOGO2I2C.png" alt="Logo 2i2c" style="max-height:210px;max-width:90%;object-fit:contain;margin-bottom:12px;">
+        <p style="font-size:1rem;color:rgba(255,255,255,0.8);font-style:italic;margin-bottom:4px;">Memperkasa Komuniti Melalui Inovasi Pintar</p>
+        <p style="font-size:0.95rem;color:rgba(255,255,255,0.7)">Peringkat Negeri Pahang &nbsp;|&nbsp; Anjuran Kolej Komuniti Bentong</p>
+        <div id="countdown-timer"></div>
+        <a href="daftar.html" class="btn btn-emas btn-besar">Daftar Sekarang →</a>
+      </div>
+    </section>
+
+    <!-- Statistik -->
+    <section class="seksyen" style="background:var(--putih);padding:30px 20px;">
+      <div class="kontena">
+        <div class="grid-3" id="stat-ringkas">
+          <div class="kad" style="text-align:center;border-top:4px solid var(--biru)">
+            <div class="kad-tajuk">Jumlah Peserta</div>
+            <div class="kad-nilai" id="stat-peserta">—</div>
+          </div>
+          <div class="kad" style="text-align:center;border-top:4px solid var(--emas)">
+            <div class="kad-tajuk">Kategori</div>
+            <div class="kad-nilai">6</div>
+          </div>
+          <div class="kad" style="text-align:center;border-top:4px solid var(--jingga)">
+            <div class="kad-tajuk">Tarikh Pertandingan</div>
+            <div class="kad-nilai" style="font-size:1rem;line-height:1.4">01–02 Dis 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modul Utama -->
+    <section class="seksyen">
+      <div class="kontena">
+        <div class="seksyen-tajuk">
+          <h2>Akses Pantas</h2>
+          <p>Semua maklumat pertandingan di satu tempat</p>
+        </div>
+        <div class="grid-3">
+          <a href="daftar.html" class="kad-modul">
+            <span class="ikon">📝</span>
+            <h3>Pendaftaran</h3>
+            <p>Daftar penyertaan anda dalam pertandingan 2i2c 2026</p>
+          </a>
+          <a href="jadual.html" class="kad-modul">
+            <span class="ikon">📅</span>
+            <h3>Jadual Acara</h3>
+            <p>Lihat jadual dan aturcara pertandingan</p>
+          </a>
+          <a href="leaderboard.html" class="kad-modul">
+            <span class="ikon">🏅</span>
+            <h3>Papan Markah</h3>
+            <p>Ranking peserta terkini mengikut kategori</p>
+          </a>
+          <a href="pengumuman.html" class="kad-modul">
+            <span class="ikon">📢</span>
+            <h3>Pengumuman</h3>
+            <p>Berita terkini dan keputusan pertandingan</p>
+          </a>
+          <a href="semak-status.html" class="kad-modul">
+            <span class="ikon">🔍</span>
+            <h3>Semak Status</h3>
+            <p>Semak status pendaftaran menggunakan e-mel</p>
+          </a>
+          <a href="login.html" class="kad-modul">
+            <span class="ikon">🔐</span>
+            <h3>Panel Admin / Juri</h3>
+            <p>Log masuk untuk juri dan pentadbir</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pengumuman Terkini -->
+    <section class="seksyen" style="background:var(--putih)">
+      <div class="kontena">
+        <div class="seksyen-tajuk">
+          <h2>Pengumuman Terkini</h2>
+        </div>
+        <div id="senarai-pengumuman-utama">
+          <div class="muatan"><div class="pemutar"></div><span>Memuatkan...</span></div>
+        </div>
+        <div style="text-align:center;margin-top:20px">
+          <a href="pengumuman.html" class="btn btn-tepi">Lihat Semua Pengumuman →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="imej/LOGO2I2C.png" alt="2i2c" style="height:48px;object-fit:contain;margin-bottom:10px;opacity:0.9;">
+      <p><strong>PERTANDINGAN 2i2c</strong> — Invention, Innovation, Creative Ideas Competition</p>
+      <p><em>Memperkasa Komuniti Melalui Inovasi Pintar</em></p>
+      <p>Anjuran <strong>Kolej Komuniti Bentong</strong>, Peringkat Negeri Pahang</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.7;">&copy; 2026 Kolej Komuniti Bentong. Hak Cipta Terpelihara.</p>
+    </footer>
+
+  </div><!-- /.kandungan-utama -->
+</div><!-- /.app-layout -->
+
+<script>
+  const togol = document.getElementById('sidebar-togol');
+  const sidebar = document.getElementById('sidebar-utama');
+  const overlay = document.getElementById('sidebar-overlay');
+  togol.addEventListener('click', () => { sidebar.classList.toggle('buka'); overlay.classList.toggle('aktif'); });
+  overlay.addEventListener('click', () => { sidebar.classList.remove('buka'); overlay.classList.remove('aktif'); });
+</script>
+
+<script type="module">
+  import { mulaCountdown } from './js/countdown.js';
+  import { muatPengumuman } from './js/pengumuman.js';
+  import { semuaPeserta } from './js/peserta.js';
+  import { formatTarikh } from './js/utiliti.js';
+
+  mulaCountdown('countdown-timer');
+
+  semuaPeserta().then(data => {
+    document.getElementById('stat-peserta').textContent = data.length;
+  }).catch(() => {});
+
+  muatPengumuman(true).then(data => {
+    const kontena = document.getElementById('senarai-pengumuman-utama');
+    if (data.length === 0) {
+      kontena.innerHTML = '<p style="text-align:center;color:var(--teks-sederhana)">Tiada pengumuman buat masa ini.</p>';
+      return;
+    }
+    kontena.innerHTML = data.map(p => `
+      <div class="pengumuman-kad">
+        <h4>${p.tajuk}</h4>
+        <p>${p.kandungan.substring(0, 150)}${p.kandungan.length > 150 ? '...' : ''}</p>
+        <small style="color:var(--kelabu-gelap)">${formatTarikh(p.tarikhHantar, 'masa')}</small>
+      </div>
+    `).join('');
+  }).catch(() => {
+    document.getElementById('senarai-pengumuman-utama').innerHTML =
+      '<p style="text-align:center;color:var(--teks-sederhana)">Tiada pengumuman buat masa ini.</p>';
+  });
+</script>
+</body>
+</html>

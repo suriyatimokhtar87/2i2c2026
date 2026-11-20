@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengumuman — 2i2c KK Bentong</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .kad-pengumuman { background: var(--putih); border-radius: var(--jejari); box-shadow: var(--bayang); padding: 24px; margin-bottom: 20px; border-left: 5px solid var(--biru); }
+    .kad-pengumuman.utama { border-color: var(--emas); background: #fffbeb; }
+    .kad-pengumuman h3 { color: var(--biru); margin-bottom: 8px; }
+    .kad-pengumuman .kandungan { color: var(--teks-sederhana); line-height: 1.7; white-space: pre-wrap; }
+    .kad-pengumuman .meta { font-size: 0.8rem; color: var(--kelabu-gelap); margin-top: 12px; }
+  </style>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar-utama">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <img src="imej/LOGO2I2C.png" alt="2i2c KK Bentong" style="max-height:70px;max-width:100%;object-fit:contain;">
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-pautan"><span class="sidebar-ikon">🏠</span><span>Laman Utama</span></a>
+      <a href="daftar.html" class="sidebar-pautan"><span class="sidebar-ikon">📝</span><span>Daftar Peserta</span></a>
+      <a href="jadual.html" class="sidebar-pautan"><span class="sidebar-ikon">📅</span><span>Jadual Acara</span></a>
+      <a href="leaderboard.html" class="sidebar-pautan"><span class="sidebar-ikon">🏅</span><span>Papan Markah</span></a>
+      <a href="pengumuman.html" class="sidebar-pautan aktif"><span class="sidebar-ikon">📢</span><span>Pengumuman</span></a>
+      <a href="semak-status.html" class="sidebar-pautan"><span class="sidebar-ikon">🔍</span><span>Semak Status</span></a>
+    </nav>
+    <div class="sidebar-bawah">
+      <a href="daftar.html" class="btn btn-utama btn-blok" style="margin-bottom:12px;justify-content:center;">Daftar Sekarang →</a>
+      <a href="login.html" class="sidebar-pautan sidebar-pautan-kecil"><span class="sidebar-ikon">🔐</span><span>Admin / Juri</span></a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-togol" id="sidebar-togol" aria-label="Buka Menu">&#9776;</button>
+
+  <!-- Kandungan Utama -->
+  <div class="kandungan-utama">
+
+    <div class="hero" style="padding:22px 20px;">
+      <div class="kontena">
+        <h1>📢 Pengumuman</h1>
+        <p>Berita terkini dan maklumat pertandingan 2i2c</p>
+      </div>
+    </div>
+
+    <section class="seksyen">
+      <div class="kontena-sempit">
+        <div id="senarai-pengumuman">
+          <div class="muatan"><div class="pemutar"></div><span>Memuatkan...</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="imej/LOGO2I2C.png" alt="2i2c" style="height:48px;object-fit:contain;margin-bottom:10px;opacity:0.9;">
+      <p><strong>PERTANDINGAN 2i2c</strong> — Invention, Innovation, Creative Ideas Competition</p>
+      <p>Anjuran <strong>Kolej Komuniti Bentong</strong>, Peringkat Negeri Pahang</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.7;">&copy; 2026 Kolej Komuniti Bentong. Hak Cipta Terpelihara.</p>
+    </footer>
+
+  </div><!-- /.kandungan-utama -->
+</div><!-- /.app-layout -->
+
+<script>
+  const togol = document.getElementById('sidebar-togol');
+  const sidebar = document.getElementById('sidebar-utama');
+  const overlay = document.getElementById('sidebar-overlay');
+  togol.addEventListener('click', () => { sidebar.classList.toggle('buka'); overlay.classList.toggle('aktif'); });
+  overlay.addEventListener('click', () => { sidebar.classList.remove('buka'); overlay.classList.remove('aktif'); });
+</script>
+
+<script type="module">
+  import { muatPengumuman } from './js/pengumuman.js';
+  import { formatTarikh } from './js/utiliti.js';
+
+  muatPengumuman(false).then(data => {
+    const kontena = document.getElementById('senarai-pengumuman');
+    if (data.length === 0) {
+      kontena.innerHTML = '<div class="alert alert-info">Tiada pengumuman buat masa ini.</div>';
+      return;
+    }
+    kontena.innerHTML = data.map(p => `
+      <div class="kad-pengumuman ${p.utama ? 'utama' : ''}">
+        ${p.utama ? '<span class="badge badge-emas" style="margin-bottom:8px;display:inline-block">⭐ Pengumuman Utama</span>' : ''}
+        <h3>${p.tajuk}</h3>
+        <div class="kandungan">${p.kandungan}</div>
+        <div class="meta">📅 ${formatTarikh(p.tarikhHantar, 'masa')}</div>
+      </div>
+    `).join('');
+  }).catch(() => {
+    document.getElementById('senarai-pengumuman').innerHTML =
+      '<div class="alert alert-ralat">Ralat semasa memuatkan pengumuman.</div>';
+  });
+</script>
+</body>
+</html>

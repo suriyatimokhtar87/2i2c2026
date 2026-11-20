@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Masuk — 2i2c KK Bentong</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: linear-gradient(135deg, #1a5276 0%, #2E86C1 50%, #F48FB1 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-kotak { background: var(--putih); border-radius: 16px; padding: 40px 36px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    .login-logo { text-align: center; margin-bottom: 28px; }
+    .login-logo h1 { font-size: 1.8rem; color: #2E86C1; }
+    .login-logo h1 span { color: var(--emas); }
+    .login-logo p { color: var(--teks-sederhana); font-size: 0.9rem; margin-top: 4px; }
+    .pemisah { text-align: center; color: var(--kelabu-gelap); font-size: 0.8rem; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <div class="login-kotak">
+    <div class="login-logo">
+      <img src="../imej/LOGO2I2C.png" alt="Logo 2i2c" style="max-height:90px;max-width:100%;object-fit:contain;margin-bottom:8px;">
+      <p>Kolej Komuniti Bentong &mdash; Negeri Pahang</p>
+    </div>
+
+    <div id="mesej-login"></div>
+
+    <form id="borang-login">
+      <div class="kumpulan-borang">
+        <label class="label" for="email">E-mel <span class="wajib">*</span></label>
+        <input type="email" id="email" class="input" placeholder="contoh@email.com" required>
+      </div>
+      <div class="kumpulan-borang">
+        <label class="label" for="katalaluan">Kata Laluan <span class="wajib">*</span></label>
+        <input type="password" id="katalaluan" class="input" placeholder="Masukkan kata laluan" required>
+      </div>
+      <button type="submit" class="btn btn-utama btn-blok btn-besar" id="btn-login">
+        Log Masuk
+      </button>
+    </form>
+
+    <div class="pemisah">— atau —</div>
+    <p style="text-align:center;font-size:0.875rem;color:var(--teks-sederhana);">
+      <a href="index.html">← Kembali ke Laman Utama</a>
+    </p>
+  </div>
+
+  <script type="module">
+    import { loginPengguna, dapatkanPeranan } from './js/auth.js';
+    import { tunjukMesej } from './js/utiliti.js';
+
+    document.getElementById('borang-login').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const katalaluan = document.getElementById('katalaluan').value;
+      const btn = document.getElementById('btn-login');
+
+      btn.textContent = 'Memproses...';
+      btn.disabled = true;
+
+      try {
+        const pengguna = await loginPengguna(email, katalaluan);
+        const data = await dapatkanPeranan(pengguna.uid);
+
+        if (!data) {
+          tunjukMesej('mesej-login', 'Akaun tidak dijumpai dalam sistem.', 'ralat');
+          btn.textContent = 'Log Masuk';
+          btn.disabled = false;
+          return;
+        }
+
+        if (data.peranan === 'admin') {
+          window.location.href = 'admin/index.html';
+        } else if (data.peranan === 'juri') {
+          window.location.href = 'juri/markah.html';
+        } else {
+          tunjukMesej('mesej-login', 'Peranan tidak dikenali.', 'ralat');
+          btn.textContent = 'Log Masuk';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        let mesej = 'Log masuk gagal. Sila semak e-mel dan kata laluan.';
+        if (err.code === 'auth/user-not-found') mesej = 'E-mel tidak dijumpai.';
+        if (err.code === 'auth/wrong-password') mesej = 'Kata laluan tidak tepat.';
+        if (err.code === 'auth/too-many-requests') mesej = 'Terlalu banyak percubaan. Cuba lagi sebentar.';
+        tunjukMesej('mesej-login', mesej, 'ralat');
+        btn.textContent = 'Log Masuk';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Peserta — 2i2c KK Bentong</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar-utama">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <img src="imej/LOGO2I2C.png" alt="2i2c KK Bentong" style="max-height:70px;max-width:100%;object-fit:contain;">
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-pautan"><span class="sidebar-ikon">🏠</span><span>Laman Utama</span></a>
+      <a href="daftar.html" class="sidebar-pautan aktif"><span class="sidebar-ikon">📝</span><span>Daftar Peserta</span></a>
+      <a href="jadual.html" class="sidebar-pautan"><span class="sidebar-ikon">📅</span><span>Jadual Acara</span></a>
+      <a href="leaderboard.html" class="sidebar-pautan"><span class="sidebar-ikon">🏅</span><span>Papan Markah</span></a>
+      <a href="pengumuman.html" class="sidebar-pautan"><span class="sidebar-ikon">📢</span><span>Pengumuman</span></a>
+      <a href="semak-status.html" class="sidebar-pautan"><span class="sidebar-ikon">🔍</span><span>Semak Status</span></a>
+    </nav>
+    <div class="sidebar-bawah">
+      <a href="daftar.html" class="btn btn-utama btn-blok" style="margin-bottom:12px;justify-content:center;">Daftar Sekarang →</a>
+      <a href="login.html" class="sidebar-pautan sidebar-pautan-kecil"><span class="sidebar-ikon">🔐</span><span>Admin / Juri</span></a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-togol" id="sidebar-togol" aria-label="Buka Menu">&#9776;</button>
+
+  <!-- Kandungan Utama -->
+  <div class="kandungan-utama">
+
+    <div class="hero" style="padding:22px 20px;">
+      <div class="kontena">
+        <h1>📝 Pendaftaran Peserta</h1>
+        <p>Isi borang di bawah untuk mendaftar penyertaan anda</p>
+      </div>
+    </div>
+
+    <section class="seksyen">
+      <div class="kontena-sempit">
+        <div class="kad">
+          <div id="mesej-daftar"></div>
+          <form id="borang-daftar">
+            <div class="grid-2">
+              <div class="kumpulan-borang">
+                <label class="label" for="nama">Nama Penuh <span class="wajib">*</span></label>
+                <input type="text" id="nama" class="input" placeholder="Nama penuh peserta" required>
+              </div>
+              <div class="kumpulan-borang">
+                <label class="label" for="institusi">Institusi / Kolej <span class="wajib">*</span></label>
+                <input type="text" id="institusi" class="input" placeholder="Nama institusi" required>
+              </div>
+            </div>
+            <div class="kumpulan-borang">
+              <label class="label" for="namaProjek">Nama Projek <span class="wajib">*</span></label>
+              <input type="text" id="namaProjek" class="input" placeholder="Tajuk projek / inovasi" required>
+            </div>
+            <div class="grid-2">
+              <div class="kumpulan-borang">
+                <label class="label" for="kategori">Kategori <span class="wajib">*</span></label>
+                <select id="kategori" class="pilihan" required>
+                  <option value="">-- Pilih Kategori --</option>
+                  <option value="Kategori 1">Kategori 1 (Negeri Pahang) — Pensyarah &amp; Guru</option>
+                  <option value="Kategori 2">Kategori 2 (Negeri Pahang) — Pelajar POLYCC/Kolej Vokasional/ILK &amp; Pensyarah Pembimbing</option>
+                  <option value="Kategori 3">Kategori 3 (Daerah Bentong) — Pelajar Sekolah Menengah + Guru Pembimbing</option>
+                  <option value="Kategori 4">Kategori 4 (Daerah Bentong) — Pelajar Sekolah Rendah + Guru Pembimbing</option>
+                  <option value="Kategori 5">Kategori 5 (Negeri Pahang) — Agensi Awam &amp; Swasta</option>
+                  <option value="Kategori 6">Kategori 6 (Negeri Pahang) — Orang Awam &amp; Komuniti</option>
+                </select>
+              </div>
+              <div class="kumpulan-borang">
+                <label class="label" for="noTelefon">No. Telefon</label>
+                <input type="tel" id="noTelefon" class="input" placeholder="01X-XXXXXXXX">
+              </div>
+            </div>
+            <div class="kumpulan-borang">
+              <label class="label" for="email">E-mel <span class="wajib">*</span></label>
+              <input type="email" id="email" class="input" placeholder="alamat@email.com" required>
+            </div>
+            <div class="kumpulan-borang">
+              <label class="label" for="abstrak">Abstrak Projek (PDF, maks 5MB)</label>
+              <input type="file" id="abstrak" class="input" accept=".pdf">
+            </div>
+            <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+              <button type="submit" class="btn btn-utama btn-besar" id="btn-hantar">Hantar Pendaftaran</button>
+              <a href="semak-status.html" class="btn btn-tepi">Semak Status Sedia Ada</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="imej/LOGO2I2C.png" alt="2i2c" style="height:48px;object-fit:contain;margin-bottom:10px;opacity:0.9;">
+      <p><strong>PERTANDINGAN 2i2c</strong> — Invention, Innovation, Creative Ideas Competition</p>
+      <p>Anjuran <strong>Kolej Komuniti Bentong</strong>, Peringkat Negeri Pahang</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.7;">&copy; 2026 Kolej Komuniti Bentong. Hak Cipta Terpelihara.</p>
+    </footer>
+
+  </div><!-- /.kandungan-utama -->
+</div><!-- /.app-layout -->
+
+<script>
+  const togol = document.getElementById('sidebar-togol');
+  const sidebar = document.getElementById('sidebar-utama');
+  const overlay = document.getElementById('sidebar-overlay');
+  togol.addEventListener('click', () => { sidebar.classList.toggle('buka'); overlay.classList.toggle('aktif'); });
+  overlay.addEventListener('click', () => { sidebar.classList.remove('buka'); overlay.classList.remove('aktif'); });
+</script>
+
+<script type="module">
+  import { daftarPeserta } from './js/peserta.js';
+  import { tunjukMesej, sahkanEmail } from './js/utiliti.js';
+
+  document.getElementById('borang-daftar').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-hantar');
+    const nama = document.getElementById('nama').value.trim();
+    const institusi = document.getElementById('institusi').value.trim();
+    const namaProjek = document.getElementById('namaProjek').value.trim();
+    const kategori = document.getElementById('kategori').value;
+    const email = document.getElementById('email').value.trim();
+    const noTelefon = document.getElementById('noTelefon').value.trim();
+    const failAbstrak = document.getElementById('abstrak').files[0];
+
+    if (!nama || !institusi || !namaProjek || !kategori || !email) {
+      tunjukMesej('mesej-daftar', 'Sila lengkapkan semua medan wajib (*).',  'ralat');
+      return;
+    }
+    if (!sahkanEmail(email)) {
+      tunjukMesej('mesej-daftar', 'Format e-mel tidak sah.', 'ralat');
+      return;
+    }
+    if (failAbstrak && failAbstrak.size > 5 * 1024 * 1024) {
+      tunjukMesej('mesej-daftar', 'Saiz fail PDF melebihi 5MB.', 'ralat');
+      return;
+    }
+
+    btn.textContent = 'Memproses...';
+    btn.disabled = true;
+
+    try {
+      await daftarPeserta({ nama, institusi, namaProjek, kategori, email, noTelefon }, failAbstrak);
+      tunjukMesej('mesej-daftar', '✅ Pendaftaran berjaya! Semak e-mel anda untuk maklumat lanjut. Status boleh disemak di halaman Semak Status.', 'berjaya', 0);
+      document.getElementById('borang-daftar').reset();
+    } catch (err) {
+      tunjukMesej('mesej-daftar', 'Pendaftaran gagal. Sila cuba lagi atau hubungi penganjur.', 'ralat');
+    } finally {
+      btn.textContent = 'Hantar Pendaftaran';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

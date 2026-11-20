@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papan Markah — 2i2c KK Bentong</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .jadual-wrapper { overflow-x: auto; border-radius: var(--jejari); box-shadow: var(--bayang); }
+  </style>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar-utama">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <img src="imej/LOGO2I2C.png" alt="2i2c KK Bentong" style="max-height:70px;max-width:100%;object-fit:contain;">
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-pautan"><span class="sidebar-ikon">🏠</span><span>Laman Utama</span></a>
+      <a href="daftar.html" class="sidebar-pautan"><span class="sidebar-ikon">📝</span><span>Daftar Peserta</span></a>
+      <a href="jadual.html" class="sidebar-pautan"><span class="sidebar-ikon">📅</span><span>Jadual Acara</span></a>
+      <a href="leaderboard.html" class="sidebar-pautan aktif"><span class="sidebar-ikon">🏅</span><span>Papan Markah</span></a>
+      <a href="pengumuman.html" class="sidebar-pautan"><span class="sidebar-ikon">📢</span><span>Pengumuman</span></a>
+      <a href="semak-status.html" class="sidebar-pautan"><span class="sidebar-ikon">🔍</span><span>Semak Status</span></a>
+    </nav>
+    <div class="sidebar-bawah">
+      <a href="daftar.html" class="btn btn-utama btn-blok" style="margin-bottom:12px;justify-content:center;">Daftar Sekarang →</a>
+      <a href="login.html" class="sidebar-pautan sidebar-pautan-kecil"><span class="sidebar-ikon">🔐</span><span>Admin / Juri</span></a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-togol" id="sidebar-togol" aria-label="Buka Menu">&#9776;</button>
+
+  <!-- Kandungan Utama -->
+  <div class="kandungan-utama">
+
+    <div class="hero" style="padding:22px 20px;">
+      <div class="kontena">
+        <h1>🏅 Papan Markah</h1>
+        <p>Ranking peserta terkini — dikemas kini secara automatik</p>
+      </div>
+    </div>
+
+    <section class="seksyen">
+      <div class="kontena">
+        <div id="leaderboard-sembunyi" style="display:none">
+          <div class="alert alert-amaran" style="font-size:1rem;text-align:center;padding:30px">
+            🔒 Penilaian sedang berlangsung. Papan markah akan dipaparkan setelah penilaian selesai.
+          </div>
+        </div>
+
+        <div id="leaderboard-kandungan">
+          <div id="penapis-kategori" class="penapis-kategori"></div>
+          <div class="jadual-wrapper">
+            <table class="jadual-data">
+              <thead>
+                <tr>
+                  <th style="width:60px">Ranking</th>
+                  <th>Peserta</th>
+                  <th>Nama Projek</th>
+                  <th>Kategori</th>
+                  <th style="text-align:right">Markah</th>
+                </tr>
+              </thead>
+              <tbody id="senarai-leaderboard">
+                <tr>
+                  <td colspan="5" style="text-align:center;padding:40px">
+                    <div class="pemutar"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:12px;font-size:0.8rem;color:var(--teks-sederhana);text-align:center">
+            🔄 Papan markah dikemas kini secara masa nyata
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="imej/LOGO2I2C.png" alt="2i2c" style="height:48px;object-fit:contain;margin-bottom:10px;opacity:0.9;">
+      <p><strong>PERTANDINGAN 2i2c</strong> — Invention, Innovation, Creative Ideas Competition</p>
+      <p>Anjuran <strong>Kolej Komuniti Bentong</strong>, Peringkat Negeri Pahang</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.7;">&copy; 2026 Kolej Komuniti Bentong. Hak Cipta Terpelihara.</p>
+    </footer>
+
+  </div><!-- /.kandungan-utama -->
+</div><!-- /.app-layout -->
+
+<script>
+  const togol = document.getElementById('sidebar-togol');
+  const sidebar = document.getElementById('sidebar-utama');
+  const overlay = document.getElementById('sidebar-overlay');
+  togol.addEventListener('click', () => { sidebar.classList.toggle('buka'); overlay.classList.toggle('aktif'); });
+  overlay.addEventListener('click', () => { sidebar.classList.remove('buka'); overlay.classList.remove('aktif'); });
+</script>
+
+<script type="module">
+  import { mulaLeaderboard } from './js/leaderboard.js';
+  mulaLeaderboard();
+</script>
+</body>
+</html>

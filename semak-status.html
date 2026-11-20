@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semak Status Pendaftaran — 2i2c KK Bentong</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar-utama">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <img src="imej/LOGO2I2C.png" alt="2i2c KK Bentong" style="max-height:70px;max-width:100%;object-fit:contain;">
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-pautan"><span class="sidebar-ikon">🏠</span><span>Laman Utama</span></a>
+      <a href="daftar.html" class="sidebar-pautan"><span class="sidebar-ikon">📝</span><span>Daftar Peserta</span></a>
+      <a href="jadual.html" class="sidebar-pautan"><span class="sidebar-ikon">📅</span><span>Jadual Acara</span></a>
+      <a href="leaderboard.html" class="sidebar-pautan"><span class="sidebar-ikon">🏅</span><span>Papan Markah</span></a>
+      <a href="pengumuman.html" class="sidebar-pautan"><span class="sidebar-ikon">📢</span><span>Pengumuman</span></a>
+      <a href="semak-status.html" class="sidebar-pautan aktif"><span class="sidebar-ikon">🔍</span><span>Semak Status</span></a>
+    </nav>
+    <div class="sidebar-bawah">
+      <a href="daftar.html" class="btn btn-utama btn-blok" style="margin-bottom:12px;justify-content:center;">Daftar Sekarang →</a>
+      <a href="login.html" class="sidebar-pautan sidebar-pautan-kecil"><span class="sidebar-ikon">🔐</span><span>Admin / Juri</span></a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-togol" id="sidebar-togol" aria-label="Buka Menu">&#9776;</button>
+
+  <!-- Kandungan Utama -->
+  <div class="kandungan-utama">
+
+    <div class="hero" style="padding:22px 20px;">
+      <div class="kontena">
+        <h1>🔍 Semak Status Pendaftaran</h1>
+        <p>Masukkan e-mel yang digunakan semasa mendaftar</p>
+      </div>
+    </div>
+
+    <section class="seksyen">
+      <div class="kontena-sempit">
+        <div class="kad">
+          <form id="borang-semak">
+            <div class="kumpulan-borang">
+              <label class="label" for="email">E-mel Pendaftaran <span class="wajib">*</span></label>
+              <input type="email" id="email" class="input" placeholder="alamat@email.com" required>
+            </div>
+            <button type="submit" class="btn btn-utama" id="btn-semak">Semak Status</button>
+          </form>
+        </div>
+        <div id="keputusan-semak" style="margin-top:20px"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="imej/LOGO2I2C.png" alt="2i2c" style="height:48px;object-fit:contain;margin-bottom:10px;opacity:0.9;">
+      <p><strong>PERTANDINGAN 2i2c</strong> — Invention, Innovation, Creative Ideas Competition</p>
+      <p>Anjuran <strong>Kolej Komuniti Bentong</strong>, Peringkat Negeri Pahang</p>
+      <p style="margin-top:8px;font-size:0.8rem;opacity:0.7;">&copy; 2026 Kolej Komuniti Bentong. Hak Cipta Terpelihara.</p>
+    </footer>
+
+  </div><!-- /.kandungan-utama -->
+</div><!-- /.app-layout -->
+
+<script>
+  const togol = document.getElementById('sidebar-togol');
+  const sidebar = document.getElementById('sidebar-utama');
+  const overlay = document.getElementById('sidebar-overlay');
+  togol.addEventListener('click', () => { sidebar.classList.toggle('buka'); overlay.classList.toggle('aktif'); });
+  overlay.addEventListener('click', () => { sidebar.classList.remove('buka'); overlay.classList.remove('aktif'); });
+</script>
+
+<script type="module">
+  import { dapatkanPesertaByEmail } from './js/peserta.js';
+  import { formatTarikh, tunjukMesej } from './js/utiliti.js';
+
+  const ikonStatus = { menunggu: '⏳', lulus: '✅', ditolak: '❌' };
+  const namaStatus = { menunggu: 'Sedang Disemak', lulus: 'Lulus', ditolak: 'Tidak Lulus' };
+  const kelasStatus = { menunggu: 'badge-menunggu', lulus: 'badge-lulus', ditolak: 'badge-ditolak' };
+
+  document.getElementById('borang-semak').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const btn = document.getElementById('btn-semak');
+    const kontena = document.getElementById('keputusan-semak');
+
+    btn.textContent = 'Menyemak...';
+    btn.disabled = true;
+    kontena.innerHTML = '<div class="muatan"><div class="pemutar"></div><span>Memuatkan...</span></div>';
+
+    try {
+      const data = await dapatkanPesertaByEmail(email);
+      if (data.length === 0) {
+        kontena.innerHTML = '<div class="alert alert-amaran">⚠️ Tiada rekod pendaftaran dijumpai untuk e-mel ini.</div>';
+      } else {
+        kontena.innerHTML = data.map(p => `
+          <div class="kad" style="margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:10px">
+              <div>
+                <h3 style="margin-bottom:4px">${p.namaProjek}</h3>
+                <p style="margin:0;color:var(--teks-sederhana)">${p.nama} — ${p.institusi}</p>
+                <p style="margin:4px 0 0;font-size:0.875rem;color:var(--kelabu-gelap)">Kategori: ${p.kategori}</p>
+                <p style="margin:2px 0 0;font-size:0.8rem;color:var(--kelabu-gelap)">Tarikh Daftar: ${formatTarikh(p.ciptaPada)}</p>
+              </div>
+              <div>
+                <span class="badge ${kelasStatus[p.status] || 'badge-menunggu'}">
+                  ${ikonStatus[p.status] || '⏳'} ${namaStatus[p.status] || p.status}
+                </span>
+              </div>
+            </div>
+            ${p.abstrakURL ? `<div style="margin-top:12px"><a href="${p.abstrakURL}" target="_blank" class="btn btn-tepi btn-kecil">📄 Lihat Abstrak</a></div>` : ''}
+          </div>
+        `).join('');
+      }
+    } catch (err) {
+      kontena.innerHTML = '<div class="alert alert-ralat">Ralat semasa menyemak. Sila cuba lagi.</div>';
+    } finally {
+      btn.textContent = 'Semak Status';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
